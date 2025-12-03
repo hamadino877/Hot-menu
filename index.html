@@ -6,8 +6,7 @@
     <title>قائمة المأكولات المصرية | Egyptian Dishes Menu</title>
     <!-- 
         تم تعديل التهيئة لاستخدام ألوان Tailwind القياسية (Standard Colors)
-        لتجنب مشكلات التحميل في بيئات CDN مثل GitHub Pages،
-        مع الحفاظ على الخط العربي (Tajawal).
+        لضمان التوافق مع الخط العربي (Tajawal).
     -->
     
     <!-- Custom Configuration Block: Only configuring the font -->
@@ -54,7 +53,7 @@
     <div id="root"></div>
 
     <script>
-        // Data structure (kept exactly as provided)
+        // Data structure
         const menuData = [
             {
                 category_ar: "الشوربة",
@@ -113,7 +112,13 @@
                     { name_ar: "فتة بمكعبات لحم بقري", name_en: "Fattah with Beef Cubes", price: 55, image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1758234012/download_dc4ob6.png"] },
                     { name_ar: "فتة موزة ضاني", name_en: "Fattah with Lamb Shank", price: 60, image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1758239802/download_kxlwrm.png"] },
                     { name_ar: "فتة مع كوارع", name_en: "Fattah with Trotters", price: 55, image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1758240078/download_sdgmlo.png"] },
-                    { name_ar: "دجاجة كاملة محشوة بالأرز", name_en: "Whole Chicken Stuffed with Rice", price: 50, image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1758245816/1758245576132-13ebc597-cc02-43ca-8a98-bef880dcbe3f_dego1c.png"] },
+                    { 
+                        name_ar: "دجاجة كاملة محشوة بالأرز", 
+                        name_en: "Whole Chicken Stuffed with Rice", 
+                        price: 50, 
+                        // تم التحديث هنا بالرابط الجديد (الفراخ المحشية)
+                        image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1764774654/grid_landscape_euym86.png"] 
+                    }, 
                     { name_ar: "حمام محشو بالأرز", name_en: "Stuffed Pigeon with Rice", sizes: [{ size_ar: "حبة واحدة", size_en: "One Piece", price: 55 }, { size_ar: "حبّتان", size_en: "Two Pieces", price: 105 }], image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1758245163/download_vnhjtg.png"] },
                     { name_ar: "حمام محشو بالفريك", name_en: "Stuffed Pigeon with Freek", sizes: [{ size_ar: "حبة واحدة", size_en: "One Piece", price: 55 }, { size_ar: "حبّتان", size_en: "Two Pieces", price: 110 }], image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1758245163/download_vnhjtg.png"] },
                     { name_ar: "نصف بطة مع محاشي", name_en: "Half Duck with Mahashi", price: 110, image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1758244835/download_oy6ck8.png"] },
@@ -138,7 +143,13 @@
                     { name_ar: "حواوشي", name_en: "Hawawshi", price: 22, image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1758273430/1758273389127-5e442b48-6bd3-482d-acb2-cd9750ab6f3a_ouqazv.png"] },
                     { name_ar: "صدور دجاج مشوية", name_en: "Grilled Chicken Breast", price: 40, image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1758280228/download_xyus8k.png"] },
                     { name_ar: "موزة مشوية", name_en: "Grilled Lamb Shank", price: 60, image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1758280536/1758280515826-251ef559-3cd0-4304-a48c-b374aa2970eb_tyuwt5.png"] },
-                    { name_ar: "نص فرخة مشوية", name_en: "Half Grilled Chicken", price: 35, image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1758280447/1758280336466-1ba07c57-ac5d-41dd-a26c-d2be87f9631f_pguene.png"] }
+                    { 
+                        name_ar: "نص فرخة مشوية", 
+                        name_en: "Half Grilled Chicken", 
+                        price: 35, 
+                        // تم التحديث هنا بالرابط الجديد (الفراخ المشوية)
+                        image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1764774652/grid_landscape_1_t3s2gl.png"] 
+                    } 
                 ]
             },
             {
@@ -193,6 +204,18 @@
         const root = document.getElementById('root');
 
         /**
+         * Generates a cache-busting URL by adding a timestamp.
+         * @param {string} url - The original image URL.
+         * @returns {string} The URL with a unique query parameter.
+         */
+        function getCacheBustingUrl(url) {
+             // إضافة مُتغير زمن عشوائي (Timestamp) إلى الرابط لمنع التخزين المؤقت
+            const timestamp = new Date().getTime();
+            return `${url}?v=${timestamp}`;
+        }
+
+
+        /**
          * Renders the main header section.
          * @returns {HTMLElement} The header element.
          */
@@ -216,17 +239,23 @@
          */
         function renderImageGallery(images, alt) {
             const gallery = document.createElement('div');
-            gallery.className = 'relative w-full h-48 overflow-hidden rounded-t-xl shadow-lg bg-gray-800 flex items-center justify-center';
+            // الخلفية الرمادية الداكنة للتأكد من أن النص البديل يظهر بوضوح
+            gallery.className = 'relative w-full h-48 overflow-hidden rounded-t-xl shadow-lg bg-gray-700 flex items-center justify-center';
 
             let currentIndex = 0;
 
             const galleryImage = document.createElement('img');
             galleryImage.className = 'w-full h-full object-cover transition-opacity duration-500 ease-in-out';
-            galleryImage.src = images[currentIndex];
+            // استخدام دالة منع التخزين المؤقت هنا
+            galleryImage.src = getCacheBustingUrl(images[currentIndex]);
             galleryImage.alt = alt;
             galleryImage.loading = "lazy";
-            // Placeholder: Dark background (gray-900) and Light text (gray-100)
-            galleryImage.onerror = () => { galleryImage.src = 'https://placehold.co/400x300/1f2937/f3f4f6?text=Image+Unavailable'; }; 
+            
+            // Placeholder Fallback: Uses an Arabic message if the image fails to load.
+            galleryImage.onerror = () => { 
+                // نستخدم صورة بديلة بنص باللون الأبيض وخلفية داكنة لضمان الوضوح
+                galleryImage.src = 'https://placehold.co/400x300/1f2937/f3f4f6?text=صورة+غير+متوفرة'; 
+            }; 
 
             gallery.appendChild(galleryImage);
 
@@ -234,7 +263,8 @@
                 // Navigation Logic
                 const showImage = (index) => {
                     currentIndex = index;
-                    galleryImage.src = images[currentIndex];
+                    // استخدام دالة منع التخزين المؤقت عند التبديل بين الصور
+                    galleryImage.src = getCacheBustingUrl(images[currentIndex]);
                     updateDots();
                 };
 
@@ -336,7 +366,8 @@
             const hero = document.createElement('div');
             // Using standard white border
             hero.className = 'relative h-48 md:h-60 rounded-2xl bg-cover bg-center shadow-xl border-4 border-white overflow-hidden';
-            hero.style.backgroundImage = `url(${category.image})`;
+            // استخدام دالة منع التخزين المؤقت هنا أيضًا لضمان تحديث صورة القسم
+            hero.style.backgroundImage = `url(${getCacheBustingUrl(category.image)})`;
             
             const overlay = document.createElement('div');
             overlay.className = 'absolute inset-0 bg-black bg-opacity-50 flex items-end p-4 md:p-6';
