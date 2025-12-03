@@ -4,8 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>قائمة المأكولات المصرية | Egyptian Dishes Menu</title>
-    <!-- Load Tailwind CSS -->
+    <!-- 
+        تم تعديل التهيئة لاستخدام ألوان Tailwind القياسية (Standard Colors)
+        لتجنب مشكلات التحميل في بيئات CDN مثل GitHub Pages،
+        مع الحفاظ على الخط العربي (Tajawal).
+    -->
+    
+    <!-- Custom Configuration Block: Only configuring the font -->
+    <script type="text/tailwindcss">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        tajawal: ['Tajawal', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    
+    <!-- Load Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Load Tajawal Font -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
     
@@ -16,43 +36,21 @@
             height: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #1e1e1e;
+            background: #1f2937; /* Dark track */
         }
-        /* تم تغيير لون شريط التمرير إلى الأبيض الفاتح */
         ::-webkit-scrollbar-thumb {
-            background-color: #f3f4f6; /* Light Gray/White */
+            background-color: #e5e7eb; /* Light Gray/White thumb */
             border-radius: 10px;
-            border: 2px solid #1e1e1e;
+            border: 2px solid #1f2937;
         }
         /* Custom selection color */
-        /* تم تغيير لون التحديد إلى الأبيض */
         ::selection {
-            background: #ffffff; /* White */
-            color: #121212;
+            background: #ffffff; 
+            color: #1f2937;
         }
     </style>
-    
-    <script>
-        // Custom Tailwind Configuration for RTL and Colors
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        // تم تغيير اللون الرئيسي إلى الأبيض/الفضي
-                        'primary-white': '#f3f4f6', // Light Gray/Silver
-                        'secondary-red': '#ef4444', // Red for emphasis (Prices)
-                        'dark-bg': '#121212',
-                        'card-bg': '#1e1e1e',
-                    },
-                    fontFamily: {
-                        tajawal: ['Tajawal', 'sans-serif'],
-                    },
-                },
-            },
-        }
-    </script>
 </head>
-<body class="bg-dark-bg text-gray-100 font-tajawal antialiased overflow-x-hidden">
+<body class="bg-gray-900 text-gray-100 font-tajawal antialiased overflow-x-hidden">
     <div id="root"></div>
 
     <script>
@@ -115,7 +113,7 @@
                     { name_ar: "فتة بمكعبات لحم بقري", name_en: "Fattah with Beef Cubes", price: 55, image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1758234012/download_dc4ob6.png"] },
                     { name_ar: "فتة موزة ضاني", name_en: "Fattah with Lamb Shank", price: 60, image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1758239802/download_kxlwrm.png"] },
                     { name_ar: "فتة مع كوارع", name_en: "Fattah with Trotters", price: 55, image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1758240078/download_sdgmlo.png"] },
-                    { name_ar: "دجاجة كاملة محشوة بالأرز", name_en: "Whole Chicken Stuffed with Rice", price: 50, image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1758245816/1758245576132-13ebc597-cc02-43ca-8a98-bef880dcbe34_dego1c.png"] },
+                    { name_ar: "دجاجة كاملة محشوة بالأرز", name_en: "Whole Chicken Stuffed with Rice", price: 50, image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1758245816/1758245576132-13ebc597-cc02-43ca-8a98-bef880dcbe3f_dego1c.png"] },
                     { name_ar: "حمام محشو بالأرز", name_en: "Stuffed Pigeon with Rice", sizes: [{ size_ar: "حبة واحدة", size_en: "One Piece", price: 55 }, { size_ar: "حبّتان", size_en: "Two Pieces", price: 105 }], image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1758245163/download_vnhjtg.png"] },
                     { name_ar: "حمام محشو بالفريك", name_en: "Stuffed Pigeon with Freek", sizes: [{ size_ar: "حبة واحدة", size_en: "One Piece", price: 55 }, { size_ar: "حبّتان", size_en: "Two Pieces", price: 110 }], image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1758245163/download_vnhjtg.png"] },
                     { name_ar: "نصف بطة مع محاشي", name_en: "Half Duck with Mahashi", price: 110, image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1758244835/download_oy6ck8.png"] },
@@ -183,12 +181,10 @@
             {
                 category_ar: "أطباق جانبية",
                 category_en: "Side Dishes",
-                image: "https://res.cloudinary.com/dsi7eogpq/image/upload/v1764718746/Best_Egyptian_Food_Royalty-Free_Images_Stock_Photos_Pictures___Shutterstock_v36sb5.jpg", // تم الإبقاء على الصورة العامة السابقة
+                image: "https://res.cloudinary.com/dsi7eogpq/image/upload/v1764718746/Best_Egyptian_Food_Royalty-Free_Images_Stock_Photos_Pictures___Shutterstock_v36sb5.jpg", 
                 items: [
-                    // تم الإبقاء على الصور الاحتياطية (Placeholders)
                     { name_ar: "أرز بالشعيرية", name_en: "Vermicelli Rice", price: 15, image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1764718492/download_si3srt.png"] },
                     { name_ar: "أرز ابيض", name_en: "White Rice", price: 15, image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1758721692/98765_cs5uqo.png"] },
-                    // تم تحديث الرابط هنا بناءً على طلبك
                     { name_ar: "رز بالخلطة", name_en: "Mixed Rice", price: 18, image: ["https://res.cloudinary.com/dsi7eogpq/image/upload/v1758674387/1758674225945-a424e092-f38e-4165-b4d6-55cfac53a4ae_sasqom.png"] }
                 ]
             }
@@ -204,8 +200,7 @@
             const header = document.createElement('header');
             header.className = 'text-center my-8 md:my-12 select-none';
             header.innerHTML = `
-                <!-- تمت إزالة اسم المطعم بناءً على طلب المستخدم -->
-                <h1 class="text-4xl md:text-6xl font-extrabold text-primary-white mb-1">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-1">
                     قائمة الطعام
                 </h1>
                 <p class="text-lg md:text-xl text-gray-400">مأكولات مصرية أصيلة | Authentic Egyptian Cuisine</p>
@@ -221,7 +216,6 @@
          */
         function renderImageGallery(images, alt) {
             const gallery = document.createElement('div');
-            // تم تقليل الارتفاع لجعل البطاقة أصغر
             gallery.className = 'relative w-full h-48 overflow-hidden rounded-t-xl shadow-lg bg-gray-800 flex items-center justify-center';
 
             let currentIndex = 0;
@@ -231,8 +225,8 @@
             galleryImage.src = images[currentIndex];
             galleryImage.alt = alt;
             galleryImage.loading = "lazy";
-            // Placeholder with White text on dark bg
-            galleryImage.onerror = () => { galleryImage.src = 'https://placehold.co/400x300/1e1e1e/f3f4f6?text=Image+Unavailable'; }; 
+            // Placeholder: Dark background (gray-900) and Light text (gray-100)
+            galleryImage.onerror = () => { galleryImage.src = 'https://placehold.co/400x300/1f2937/f3f4f6?text=Image+Unavailable'; }; 
 
             gallery.appendChild(galleryImage);
 
@@ -245,9 +239,9 @@
                 };
 
                 const prevButton = document.createElement('button');
-                // تم تغيير لون الأيقونات إلى الأبيض
-                prevButton.className = 'absolute top-1/2 -translate-y-1/2 start-2 p-2 bg-black bg-opacity-50 text-primary-white text-2xl rounded-full hover:bg-opacity-80 transition duration-300 focus:outline-none';
-                prevButton.innerHTML = '&#10095;'; // RTL arrow for previous
+                // Standard white text on semi-transparent black background
+                prevButton.className = 'absolute top-1/2 -translate-y-1/2 start-2 p-2 bg-black bg-opacity-50 text-white text-2xl rounded-full hover:bg-opacity-80 transition duration-300 focus:outline-none';
+                prevButton.innerHTML = '&#10095;'; 
                 prevButton.setAttribute('aria-label', 'Previous image');
                 prevButton.onclick = () => {
                     const newIndex = (currentIndex === 0) ? images.length - 1 : currentIndex - 1;
@@ -255,9 +249,9 @@
                 };
 
                 const nextButton = document.createElement('button');
-                // تم تغيير لون الأيقونات إلى الأبيض
-                nextButton.className = 'absolute top-1/2 -translate-y-1/2 end-2 p-2 bg-black bg-opacity-50 text-primary-white text-2xl rounded-full hover:bg-opacity-80 transition duration-300 focus:outline-none';
-                nextButton.innerHTML = '&#10094;'; // RTL arrow for next
+                // Standard white text on semi-transparent black background
+                nextButton.className = 'absolute top-1/2 -translate-y-1/2 end-2 p-2 bg-black bg-opacity-50 text-white text-2xl rounded-full hover:bg-opacity-80 transition duration-300 focus:outline-none';
+                nextButton.innerHTML = '&#10094;'; 
                 nextButton.setAttribute('aria-label', 'Next image');
                 nextButton.onclick = () => {
                     const newIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
@@ -271,8 +265,8 @@
                     dotsContainer.innerHTML = '';
                     images.forEach((_, i) => {
                         const dot = document.createElement('span');
-                        // تم تغيير لون النقاط إلى الأبيض
-                        dot.className = `inline-block w-2.5 h-2.5 mx-1 rounded-full cursor-pointer transition-colors duration-300 ${i === currentIndex ? 'bg-primary-white shadow-md' : 'bg-primary-white/50'}`;
+                        // Standard white/light gray dots
+                        dot.className = `inline-block w-2.5 h-2.5 mx-1 rounded-full cursor-pointer transition-colors duration-300 ${i === currentIndex ? 'bg-white shadow-md' : 'bg-white/50'}`;
                         dot.onclick = () => showImage(i);
                         dotsContainer.appendChild(dot);
                     });
@@ -293,39 +287,35 @@
          * @returns {HTMLElement} The card element.
          */
         function renderMenuItem(item) {
-             // تحديد عرض البطاقة بشكل متجاوب (Responsive) لمحاكاة شبكة الأعمدة من 1 إلى 6،
-             // مع دعم التوسيط الذي يوفره الـ Flexbox في الحاوية الرئيسية.
             const responsiveWidths = 'w-full sm:w-[calc(50%-8px)] md:w-[calc(33.333%-10.66px)] lg:w-[calc(25%-12px)] xl:w-[calc(20%-12.8px)] 2xl:w-[calc(16.66%-13.33px)]';
 
             const card = document.createElement('div');
-            // دمج الـ classes الجديدة للتحكم في العرض
-            card.className = `bg-card-bg rounded-xl shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-[0_0_40px_rgba(243,244,246,0.3)] flex flex-col cursor-default ${responsiveWidths}`;
+            // Using standard bg-gray-800 for card background
+            card.className = `bg-gray-800 rounded-xl shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] flex flex-col cursor-default ${responsiveWidths}`;
 
             const gallery = renderImageGallery(item.image, item.name_ar);
             card.appendChild(gallery);
 
             const itemInfo = document.createElement('div');
-            // تم تقليل padding قليلاً
             itemInfo.className = 'p-3 text-gray-100 flex flex-col justify-center flex-grow';
             
-            // تم تغيير لون عنوان العنصر إلى الأبيض
-            itemInfo.innerHTML = `<h3 class="text-lg font-bold text-primary-white mb-1 text-center">${item.name_ar} | ${item.name_en}</h3>`;
+            // Using standard white text
+            itemInfo.innerHTML = `<h3 class="text-lg font-bold text-white mb-1 text-center">${item.name_ar} | ${item.name_en}</h3>`;
             
             if (item.sizes) {
                 // Renders multiple sizes and prices
                 item.sizes.forEach(size => {
                     const p = document.createElement('p');
                     p.className = 'text-sm text-gray-300 text-center my-0.5';
-                    // تم تغيير لون السعر إلى الأحمر
-                    p.innerHTML = `${size.size_ar} | ${size.size_en}: <span class="text-md text-secondary-red font-extrabold">${size.price} درهم | AED</span>`;
+                    // Using standard red-500 for price accent
+                    p.innerHTML = `${size.size_ar} | ${size.size_en}: <span class="text-md text-red-500 font-extrabold">${size.price} درهم | AED</span>`;
                     itemInfo.appendChild(p);
                 });
             } else {
                 // Renders single price
                 const p = document.createElement('p');
-                // تم تقليل حجم السعر قليلاً
-                // تم تغيير لون السعر إلى الأحمر
-                p.className = 'text-xl font-extrabold text-secondary-red text-center pt-1';
+                // Using standard red-500 for price accent
+                p.className = 'text-xl font-extrabold text-red-500 text-center pt-1';
                 p.innerHTML = `${item.price} درهم | AED`;
                 itemInfo.appendChild(p);
             }
@@ -344,8 +334,8 @@
             
             // Category Hero Banner (with background image)
             const hero = document.createElement('div');
-            // تم تغيير لون الإطار إلى الأبيض
-            hero.className = 'relative h-48 md:h-60 rounded-2xl bg-cover bg-center shadow-xl border-4 border-primary-white overflow-hidden';
+            // Using standard white border
+            hero.className = 'relative h-48 md:h-60 rounded-2xl bg-cover bg-center shadow-xl border-4 border-white overflow-hidden';
             hero.style.backgroundImage = `url(${category.image})`;
             
             const overlay = document.createElement('div');
@@ -353,9 +343,9 @@
             
             const titleContainer = document.createElement('div');
             titleContainer.className = 'text-right z-10';
-            // تم تغيير لون العنوان إلى الأبيض
+            // Using standard white text
             titleContainer.innerHTML = `
-                <h2 class="text-3xl md:text-4xl font-black text-primary-white">${category.category_ar}</h2>
+                <h2 class="text-3xl md:text-4xl font-black text-white">${category.category_ar}</h2>
                 <h3 class="text-lg md:text-xl font-light text-gray-300">${category.category_en}</h3>
             `;
             
@@ -364,7 +354,6 @@
 
             // Items Grid
             const itemsGrid = document.createElement('div');
-            // التغيير الحاسم: استخدام flexbox مع justify-center لضمان توسيط العناصر في الصف الأخير
             itemsGrid.className = 'flex flex-wrap justify-center gap-4 mt-6';
             
             category.items.forEach(item => {
